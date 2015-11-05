@@ -28,7 +28,7 @@ class Team {
 
   //constructor method
   Team(boolean home, String teamName, int homeScore, int awayScore) {
-    if (home) {
+    if (home) {    //if team was the home team
       this.teamName = teamName;
       goalsFor = homeScore;
       goalsAgainst = awayScore;
@@ -36,77 +36,113 @@ class Team {
       homeGoalsFor = homeScore;
       homeGoalsAgainst = awayScore;
 
+      //away
+      awayPoints = 0;
+      awayGoalsFor = 0;
+      awayGoalsAgainst = 0;
+      awayWins = 0;
+      awayLoses = 0;
+      awayDraws = 0;
+
       if (homeScore > awayScore) { //if the home team won
         //general
         points = 3;
         wins = 1;
         loses = 0;
         draws = 0;
-        
+
         //home
         homePoints = 3;
         homeWins = 1;
         homeLoses = 0;
         homeDraws = 0;
-        
-        //away
-        awayPoints = 0;
-        awayGoalsFor = 0;
-        awayGoalsAgainst = 0;
-        awayWins = 0;
-        awayLoses = 0;
-        awayDraws = 0;
       }//end if()
-      else if (homeScore < awayScore){ //if the home team lost
+      else if (homeScore < awayScore) { //if the home team lost
         //general
         points = 0;
-        wins = 1;
+        wins = 0;
         loses = 1;
         draws = 0;
-        
+
         //home
         homePoints = 0;
         homeWins = 0;
         homeLoses = 1;
         homeDraws = 0;
-        
-        //away
-        awayPoints = 0;
-        awayGoalsFor = 0;
-        awayGoalsAgainst = 0;
-        awayWins = 0;
-        awayLoses = 0;
-        awayDraws = 0;
+
       }//end else if()
-      else{  //if the home team drew
+      else {  //if the home team drew
         //general
         points = 1;
         wins = 0;
         loses = 0;
         draws = 1;
-        
+
         //home
         homePoints = 1;
         homeWins = 0;
         homeLoses = 0;
         homeDraws = 1;
-        
-        //away
-        awayPoints = 0;
-        awayGoalsFor = 0;
-        awayGoalsAgainst = 0;
-        awayWins = 0;
-        awayLoses = 0;
-        awayDraws = 0;
+
       }//end else()
-      
     }//end if()
-    else {
+    else {        //if team was the away team
       this.teamName = teamName;
       goalsFor = awayScore;
       goalsAgainst = homeScore;
+      goalDifference = goalsFor - goalsAgainst;
       awayGoalsFor = awayScore;
       awayGoalsAgainst = homeScore;
+
+      //home
+      homePoints = 0;
+      homeGoalsFor = 0;
+      homeGoalsAgainst = 0;
+      homeWins = 0;
+      homeLoses = 0;
+      homeDraws = 0;
+
+      if (homeScore > awayScore) { //if the away team lost
+        //general
+        points = 0;
+        wins = 0;
+        loses = 1;
+        draws = 0;
+
+        //away
+        awayPoints = 0;
+        awayWins = 0;
+        awayLoses = 1;
+        awayDraws = 0;
+      }//end if()
+      else if (homeScore < awayScore) { //if the away team won
+        //general
+        points = 3;
+        wins = 1;
+        loses = 0;
+        draws = 0;
+
+        //away
+        awayPoints = 3;
+        awayWins = 1;
+        awayLoses = 0;
+        awayDraws = 0;
+
+      }//end else if()
+      else {  //if the away team drew
+        //general
+        points = 1;
+        wins = 0;
+        loses = 0;
+        draws = 1;
+
+        //away
+        awayPoints = 1;
+        awayWins = 0;
+        awayLoses = 0;
+        awayDraws = 1;
+
+      }//end else()
     }//end else()
   }//end League() method
 

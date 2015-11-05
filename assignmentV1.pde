@@ -10,6 +10,11 @@ void setup() {
 
   //call the loadData() method
   loadData("test.csv");
+  
+  //test
+  println(teams.get(0).get(19).teamName + " - " + teams.get(0).get(19).points + " pts - " + teams.get(0).get(19).goalsFor + " goals - " + teams.get(0).get(19).wins + " wins - " + teams.get(0).get(19).loses + " loses - " + teams.get(0).get(19).draws + " draws");
+  println(teams.get(2).get(8).teamName + " - " + teams.get(2).get(8).points + " pts - " + teams.get(2).get(8).goalsFor + " goals - " + teams.get(2).get(8).wins + " wins - " + teams.get(2).get(8).loses + " loses - " + teams.get(2).get(8).draws + " draws");
+  
 }//end setup() method
 
 void draw() {

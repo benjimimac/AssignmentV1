@@ -1,4 +1,5 @@
 class League{
+  String leagueName;
   int noOfTeams;
   
   //constructor method
