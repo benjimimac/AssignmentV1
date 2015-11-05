@@ -1,14 +1,9 @@
-class League {
-  //fields
-  String teamName;
-  int points;
-  int homePoints;
-  int awayPoints;
-  int goalsFor;
-  int homeGoalsFor;
-  int awayGoalsFor;
+class League{
+  int noOfTeams;
   
   //constructor method
-  League() {
-  }//end League() method
+  League(){
+    
+  }
+  
 }//end League class

@@ -1,56 +1,60 @@
 //Update version
 //Declare any constants required
 final int SEASONS = 3;
-final int ALEAGUE = 20;
-final int BLEAGUE = 18;
-//final int noOfSeasons = 19;
-int bNoOfGames;
-int bTotalGames;
 
-//Create ArrayLists to store all the premier league data
-//ArrayList<String> pLeagueDates = new ArrayList<String>();
-ArrayList<League> pLeagueHomeTeam = new ArrayList<String>();
-ArrayList<String> pLeagueAwayTeam = new ArrayList<String>();
-ArrayList<Integer> pLeagueHomeScore = new ArrayList<Integer>();
-ArrayList<Integer> pLeagueAwayScore = new ArrayList<Integer>();
-ArrayList<ArrayList<String>> pLeagueTables = new ArrayList<ArrayList<String>>(); 
+ArrayList<ArrayList<Team>> teams = new ArrayList<ArrayList<Team>>();
 
-  void setup() {
+void setup() {
   size(600, 600);
   background(0, 0, 255);
-  
-  //how many games in a season
-  //Britain
-  bNoOfGames = (ALEAGUE / 2) * ((ALEAGUE - 1) * 2);
-  bTotalGames = bNoOfGames * SEASONS;
 
-  //Load premier league data into an array of Strings
-  String[] pLeagueLines = loadStrings("test.csv");
-  for (String s : pLeagueLines) {
-    //Split each element of the array on "'" into separate arrays 
-    String[] pLeagueValues = s.split(",");
-    for (int i = 0; i < pLeagueValues.length; i++) {
-      //Store the relevant data types into the relevant ArrayLists
-      if ( i == 1) {
-        pLeagueHomeTeam.add(pLeagueValues[i]);
-      } else if (i == 2) {
-        pLeagueAwayTeam.add(pLeagueValues[i]);
-      } else if (i == 3) {
-        //println(pLeagueValues[i]);
-        String pScores = pLeagueValues[i];
-        String[] tempPScores = pScores.split("-");
-        //println("tempPScores is length " + tempPScores.length + " index is " + index++);
-        pLeagueHomeScore.add(parseInt(tempPScores[0]));
-        pLeagueAwayScore.add(parseInt(tempPScores[1]));
-      }
-    }
-  }
-
-
-  for (int i = 0; i < pLeagueAwayTeam.size(); i++) {
-    println(/*pLeagueDates.get(i) + ", " + */pLeagueHomeTeam.get(i) + ", " + pLeagueAwayTeam.get(i) + ", " + pLeagueHomeScore.get(i) + "-" + pLeagueAwayScore.get(i));
-  }
-}
+  //call the loadData() method
+  loadData("test.csv");
+}//end setup() method
 
 void draw() {
-}
+}//end draw() method
+
+//method to load the data into the program
+void loadData(String filename) {
+  //open the file and load it into an array of type String
+  String[] leagueLines = loadStrings(filename);
+
+  //find out how many games in a season
+  int gamesPerSeason = leagueLines.length / SEASONS;
+
+  //use a for loop to iterate through the array
+  for (int i = 0; i < SEASONS; i++) {
+    //add an outer dimension to the ArrayList
+    teams.add(new ArrayList<Team>());
+    
+    for (int j = gamesPerSeason * i; j < gamesPerSeason + (gamesPerSeason * i); j++) {
+      //split each element into a new array of type String - split on ","
+      String[] leagueValues = leagueLines[j].split(","); 
+
+      //store the elements of leagueValues in appropriate variables
+      String homeTeam = leagueValues[1]; 
+      String awayTeam = leagueValues[2]; 
+
+      //split the last element in the array into a new array - split on "-"
+      String[] scores = leagueValues[3].split("-"); 
+
+      //parse the new array into variables of type float
+      float homeScore = parseFloat(scores[0]); 
+      float awayScore = parseFloat(scores[1]);
+
+      //create two int variables that store the inex of the current teams - default is -1
+      int homeTeamIndex = -1;
+      int awayTeamIndex = -1;
+
+      //create objects if needed or add data to existing objects
+      if (teams.get(i).size() > 0) {
+        for (int k = 0; k < teams.get(i).size(); k++) {
+          if (homeTeam.equals(teams.get(i).get(i).teamName)) {
+            homeTeamIndex = teams.get(i).indexOf(homeTeam);
+          }
+        }//end inner inner for()
+      }
+    }//end inner for()
+  }//end for()
+}//end loadData() method
