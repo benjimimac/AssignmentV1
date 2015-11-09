@@ -1,6 +1,6 @@
 //Update version
 //Declare any constants required
-final int SEASONS = 3;
+final int SEASONS = 10;
 
 ArrayList<ArrayList<Team>> teams = new ArrayList<ArrayList<Team>>();
 
@@ -38,16 +38,7 @@ void loadData(String filename) {
       //split each element into a new array of type String - split on ","
       String[] leagueValues = leagueLines[j].split(","); 
 
-      //store the elements of leagueValues in appropriate variables
-      String homeTeamName = leagueValues[1]; 
-      String awayTeamName = leagueValues[2]; 
-
-      //split the last element in the array into a new array - split on "-"
-      String[] scores = leagueValues[3].split("-"); 
-
-      //parse the new array into variables of type float
-      int homeScore = parseInt(scores[0]); 
-      int awayScore = parseInt(scores[1]);
+      
 
       //create two int variables that store the inex of the current teams - default is -1
       int homeTeamIndex = -1;
@@ -56,26 +47,23 @@ void loadData(String filename) {
       //create objects if needed or add data to existing objects
       //if (teams.get(i).size() > 0) {
         for (int k = 0; k < teams.get(i).size(); k++) {
-          if (homeTeamName.equals(teams.get(i).get(k).teamName)) {
-            homeTeamIndex = teams.get(i).indexOf(homeTeamName);
+          if (leagueValues[0].equals(teams.get(i).get(k).teamName)) {
+            homeTeamIndex = k;
           }//end if()
           
-          if (awayTeamName.equals(teams.get(i).get(k).teamName)) {
-            awayTeamIndex = teams.get(i).indexOf(awayTeamName);
+          if (leagueValues[1].equals(teams.get(i).get(k).teamName)) {
+            awayTeamIndex = k;
           }//end if()
           
         }//end inner inner for()
         
         if(homeTeamIndex < 0){
-          teams.get(i).add(new Team(true, homeTeamName, homeScore, awayScore));
+          teams.get(i).add(new Team(leagueValues));
         }//end if()
         else{
-          teams.get(i).get(homeTeamIndex).editHomeTeam(homeScore, awayScore);
-        }//end else()
+          teams.get(i).get(homeTeamIndex).editTeam(leagueValues);
+        }//end else()     
         
-        
-        
-      //}//end if()
     }//end inner for()
     
     for(int j = 0; j < 20; j++){
@@ -83,4 +71,4 @@ void loadData(String filename) {
     }
     
   }//end for()
-}//end loadData() method
+}
